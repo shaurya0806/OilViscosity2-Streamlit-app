@@ -62,12 +62,15 @@ def main():
         else:
             status = 'Problem'
         
+        
+        st.success(f'Predicted Result of Oil Viscosity on {p4}/{p3}/{p2} will be : {pred_value} ')
+        
         st.success(f'Predicted Value of Oil Viscosity% on {p4}/{p3}/{p2} will be : {ViscosityPct}%')
         
                    
         st.success(f'Predicted Status of Oil Viscosity on {p4}/{p3}/{p2} will be : {status} ')
         
-        st.success(f'Predicted Result of Oil Viscosity on {p4}/{p3}/{p2} will be : {pred_value} ')
+        
 
         
         st.info("""
