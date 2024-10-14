@@ -22,7 +22,11 @@ def main():
     st.markdown(html_temp, unsafe_allow_html=True)
     
     
-    model = joblib.load('OilViscosity1Model_rf_100_40.joblib')  
+    model = joblib.load('OilViscosity1ModelNew_rf_100_40.joblib') 
+    
+    Eqmt_Id = st.text_input("Enter Equipment ID you want to Predict for:")
+    
+    Comp_Id = st.text_input("Enter Compartment ID you want to Predict for:")
     
     Visc_temp = st.selectbox('Select Viscosity Temperature you want to Predict on:' ,options =['40°C', '100°C'])
         
@@ -46,7 +50,7 @@ def main():
         OilStandard = 115
     
     
-    pred = model.predict([[p1,p2,p3,p4]])
+    pred = model.predict([[p1,Eqmt_Id,Comp_Id,p2,p3,p4]])
     pred_value = round(pred[0], 2)
     
     Viscosity = ((pred_value / OilStandard) - 1) * 100
@@ -62,15 +66,12 @@ def main():
         else:
             status = 'Problem'
         
-        
-        st.success(f'Predicted Result of Oil Viscosity on {p4}/{p3}/{p2} will be : {pred_value} ')
-        
         st.success(f'Predicted Value of Oil Viscosity% on {p4}/{p3}/{p2} will be : {ViscosityPct}%')
         
                    
         st.success(f'Predicted Status of Oil Viscosity on {p4}/{p3}/{p2} will be : {status} ')
         
-        
+        st.success(f'Predicted Result of Oil Viscosity on {p4}/{p3}/{p2} will be : {pred_value} ')
 
         
         st.info("""
