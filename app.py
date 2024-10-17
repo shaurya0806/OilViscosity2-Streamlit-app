@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Sep 23 00:54:29 2024
-
 @author: HP
 """
 
@@ -22,11 +20,14 @@ def main():
     st.markdown(html_temp, unsafe_allow_html=True)
     
     
-    model = joblib.load('OilViscosity1ModelNew_rf_100_40.joblib') 
+    model = joblib.load('OilViscosity1ModelNew_rf_100_40') 
     
-    Eqmt_Id = st.text_input("Enter Equipment ID you want to Predict for:")
+    Eqmt = st.selectbox('Select Equipment Name you want to Predict for:' ,options =['UT006', 'UE007'])
     
-    Comp_Id = st.text_input("Enter Compartment ID you want to Predict for:")
+    if Eqmt == 'UT006':
+        Compt = st.selectbox('Select Compartment Name you want to Predict for:' ,options =['ENGINE'])
+    else:
+        Compt = st.selectbox('Select Compartment Name you want to Predict for:' ,options =['DIFFERENTIAL FRONT'])
     
     Visc_temp = st.selectbox('Select Viscosity Temperature you want to Predict on:' ,options =['40°C', '100°C'])
         
@@ -36,6 +37,18 @@ def main():
     
     p4 = st.number_input("Select the Date you want to Predict:", step=1, format="%d", value = 1, max_value=31)
     
+    
+    if Eqmt =='UT006':
+        Eqmt_Id = 14507
+    else:
+        Eqmt_Id = 121767
+        
+        
+    if Compt =='ENGINE':
+        Comp_Id = 117
+    else:
+        Comp_Id = 385
+        
    
     
     if Visc_temp == '100°C':
